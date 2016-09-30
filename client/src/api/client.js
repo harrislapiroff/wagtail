@@ -1,3 +1,6 @@
+const fetch = global.fetch;
+
+// fetch wrapper for JSON APIs.
 export const get = (url) => {
   const headers = new Headers();
   headers.append('Content-Type', 'application/json');
@@ -8,5 +11,6 @@ export const get = (url) => {
     method: 'GET'
   };
 
-  return fetch(url, options).then(response => response.json());
+  return fetch(url, options)
+    .then(response => response.json());
 };

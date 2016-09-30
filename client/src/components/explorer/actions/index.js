@@ -1,9 +1,7 @@
 import { createAction } from 'redux-actions';
 
 import { PAGES_ROOT_ID } from '../../../config';
-import { ADMIN_API } from '../../../config/wagtail';
-
-import { get } from '../../../api/client';
+import * as admin from '../../../api/admin';
 
 export const fetchStart = createAction('FETCH_START');
 
@@ -30,18 +28,17 @@ export function fetchTree(id = 1) {
   return (dispatch) => {
     dispatch(fetchBranchStart(id));
 
-    return get(`${ADMIN_API.PAGES}${id}/`)
-      .then(json => {
-        dispatch(fetchBranchSuccess(id, json));
+    return admin.getPage(id).then((json) => {
+      dispatch(fetchBranchSuccess(id, json));
 
-        // Recursively walk up the tree to the root, to figure out how deep
-        // in the tree we are.
-        if (json.meta.parent) {
-          dispatch(fetchTree(json.meta.parent.id));
-        } else {
-          dispatch(treeResolved());
-        }
-      });
+      // Recursively walk up the tree to the root, to figure out how deep
+      // in the tree we are.
+      if (json.meta.parent) {
+        dispatch(fetchTree(json.meta.parent.id));
+      } else {
+        dispatch(treeResolved());
+      }
+    });
   };
 }
 
@@ -50,13 +47,12 @@ export function fetchRoot() {
     // TODO Should not need an id.
     dispatch(resetTree(1));
 
-    return get(`${ADMIN_API.PAGES}?child_of=${PAGES_ROOT_ID}`)
-      .then(json => {
-        // TODO right now, only works for a single homepage. What do we do if there is no homepage?
-        const rootId = json.items[0].id;
+    return admin.getChildPages(PAGES_ROOT_ID).then((json) => {
+      // TODO right now, only works for a single homepage. What do we do if there is no homepage?
+      const rootId = json.items[0].id;
 
-        dispatch(fetchTree(rootId));
-      });
+      dispatch(fetchTree(rootId));
+    });
   };
 }
 
@@ -73,20 +69,12 @@ export function fetchChildren(id = 'root') {
   return (dispatch, getState) => {
     const { explorer } = getState();
 
-    let api = `${ADMIN_API.PAGES}?child_of=${id}`;
-
-    if (explorer.fields) {
-      api += `&fields=${explorer.fields.map(global.encodeURIComponent).join(',')}`;
-    }
-
-    if (explorer.filter) {
-      api = `${api}&${explorer.filter}`;
-    }
-
     dispatch(fetchChildrenStart(id));
 
-    return get(api)
-      .then(json => dispatch(fetchChildrenSuccess(id, json)));
+    return admin.getChildPages(id, {
+      fields: explorer.fields,
+      filter: explorer.filter,
+    }).then(json => dispatch(fetchChildrenSuccess(id, json)));
   };
 }
 
@@ -113,7 +101,7 @@ export function setFilter(filter) {
 export function fetchPage(id = 1) {
   return dispatch => {
     dispatch(fetchStart(id));
-    return get(`${ADMIN_API.PAGES}${id}/`)
+    return admin.getPage(id)
       .then(json => dispatch(fetchSuccess(id, json)))
       .then(json => dispatch(fetchChildren(id, json)))
       .catch(json => dispatch(fetchFailure(new Error(JSON.stringify(json)))));
