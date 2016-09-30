@@ -33,7 +33,7 @@ module.exports = function exports() {
   var CLIENT_DIR = path.resolve(__dirname, '..', 'src');
 
   return {
-    entry: entryPoints('./wagtail/**/static_src/**/app/*.entry.js'),
+    entry: ['babel-polyfill'].concat(entryPoints('./wagtail/**/static_src/**/app/*.entry.js')),
     resolve: {
       alias: {
         config: path.resolve(CLIENT_DIR, 'config'),
