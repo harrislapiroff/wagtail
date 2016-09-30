@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ADMIN_PAGES, STRINGS } from '../../config';
+import { ADMIN_URLS, STRINGS } from '../../config/wagtail';
 import Icon from '../../components/icon/Icon';
 import Button from '../../components/Button/Button';
 import PublishStatus from '../../components/publish-status/PublishStatus';
@@ -18,7 +18,7 @@ const ExplorerItem = ({ title, typeName, data, filter, onItemClick }) => {
   }
 
   return (
-    <Button href={`${ADMIN_PAGES}${id}`} className="c-explorer__item">
+    <Button href={`${ADMIN_URLS.PAGES}${id}`} className="c-explorer__item">
       {count > 0 ? (
         <span role="button" className="c-explorer__children" onClick={onItemClick.bind(null, id)}>
           <Icon name="folder-inverse" title={STRINGS.SEE_CHILDREN} />

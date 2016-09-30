@@ -1,6 +1,7 @@
 import { createAction } from 'redux-actions';
 
-import { API_PAGES, PAGES_ROOT_ID } from '../../../config';
+import { PAGES_ROOT_ID } from '../../../config';
+import { ADMIN_API } from '../../../config/wagtail';
 
 function getHeaders() {
   const headers = new Headers();
@@ -42,7 +43,7 @@ export function fetchTree(id = 1) {
   return (dispatch) => {
     dispatch(fetchBranchStart(id));
 
-    return get(`${API_PAGES}${id}/`)
+    return get(`${ADMIN_API.PAGES}${id}/`)
       .then(json => {
         dispatch(fetchBranchSuccess(id, json));
 
@@ -62,7 +63,7 @@ export function fetchRoot() {
     // TODO Should not need an id.
     dispatch(resetTree(1));
 
-    return get(`${API_PAGES}?child_of=${PAGES_ROOT_ID}`)
+    return get(`${ADMIN_API.PAGES}?child_of=${PAGES_ROOT_ID}`)
       .then(json => {
         // TODO right now, only works for a single homepage. What do we do if there is no homepage?
         const rootId = json.items[0].id;
@@ -79,13 +80,13 @@ export const fetchChildrenSuccess = createAction('FETCH_CHILDREN_SUCCESS', (id, 
 export const fetchChildrenStart = createAction('FETCH_CHILDREN_START');
 
 /**
- * Gets the children of a node from the API
+ * Gets the children of a node from the API.
  */
 export function fetchChildren(id = 'root') {
   return (dispatch, getState) => {
     const { explorer } = getState();
 
-    let api = `${API_PAGES}?child_of=${id}`;
+    let api = `${ADMIN_API.PAGES}?child_of=${id}`;
 
     if (explorer.fields) {
       api += `&fields=${explorer.fields.map(global.encodeURIComponent).join(',')}`;
@@ -125,7 +126,7 @@ export function setFilter(filter) {
 export function fetchPage(id = 1) {
   return dispatch => {
     dispatch(fetchStart(id));
-    return get(`${API_PAGES}${id}/`)
+    return get(`${ADMIN_API.PAGES}${id}/`)
       .then(json => dispatch(fetchSuccess(id, json)))
       .then(json => dispatch(fetchChildren(id, json)))
       .catch(json => dispatch(fetchFailure(new Error(JSON.stringify(json)))));

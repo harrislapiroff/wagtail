@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-import { STRINGS } from '../../config';
+import { STRINGS } from '../../config/wagtail';
 
 // TODO Should be a format function not a React component?
 const PublishedTime = ({ publishedAt }) => {

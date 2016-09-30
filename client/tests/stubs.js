@@ -5,15 +5,15 @@
  */
 
 global.wagtailConfig = {
-  api: {
-    documents: '/admin/api/v1beta/documents/',
-    images: '/admin/api/v1beta/images/',
-    pages: '/admin/api/v1beta/pages/',
+  ADMIN_API: {
+    DOCUMENTS: '/admin/api/v2beta/documents/',
+    IMAGES: '/admin/api/v2beta/images/',
+    PAGES: '/admin/api/v2beta/pages/',
   },
-  urls: {
-    pages: '/admin/pages/',
+  ADMIN_URLS: {
+    PAGES: '/admin/pages/',
   },
-  strings: {
+  STRINGS: {
     EXPLORER: 'Explorer',
     LOADING: 'Loading...',
     NO_RESULTS: 'No results',

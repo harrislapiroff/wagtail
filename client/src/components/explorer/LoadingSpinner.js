@@ -1,5 +1,5 @@
 import React from 'react';
-import { STRINGS } from '../../config';
+import { STRINGS } from '../../config/wagtail';
 import Icon from '../../components/icon/Icon';
 
 const LoadingSpinner = () => (

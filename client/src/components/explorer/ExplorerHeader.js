@@ -1,6 +1,7 @@
 import React from 'react';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
-import { EXPLORER_ANIM_DURATION, EXPLORER_FILTERS, STRINGS } from '../../config';
+import { EXPLORER_ANIM_DURATION, EXPLORER_FILTERS } from '../../config';
+import { STRINGS } from '../../config/wagtail';
 
 import Icon from '../../components/icon/Icon';
 import Filter from '../../components/explorer/Filter';
