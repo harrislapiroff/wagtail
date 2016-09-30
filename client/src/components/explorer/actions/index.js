@@ -3,20 +3,7 @@ import { createAction } from 'redux-actions';
 import { PAGES_ROOT_ID } from '../../../config';
 import { ADMIN_API } from '../../../config/wagtail';
 
-function getHeaders() {
-  const headers = new Headers();
-  headers.append('Content-Type', 'application/json');
-
-  return {
-    credentials: 'same-origin',
-    headers: headers,
-    method: 'GET'
-  };
-}
-
-function get(url) {
-  return fetch(url, getHeaders()).then(response => response.json());
-}
+import { get } from '../../../api/client';
 
 export const fetchStart = createAction('FETCH_START');
 
