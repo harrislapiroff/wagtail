@@ -17,7 +17,7 @@ function entryPoint(filename) {
   var name = appName(filename);
   var entryName = path.basename(filename, '.entry.js');
   var outputPath = path.join('wagtail', name, 'static', name, 'js', entryName);
-  return [outputPath, filename];
+  return [outputPath, ['babel-polyfill', filename]];
 }
 
 
@@ -33,7 +33,7 @@ module.exports = function exports() {
   var CLIENT_DIR = path.resolve(__dirname, '..', 'src');
 
   return {
-    entry: ['babel-polyfill'].concat(entryPoints('./wagtail/**/static_src/**/app/*.entry.js')),
+    entry: entryPoints('./wagtail/**/static_src/**/app/*.entry.js'),
     resolve: {
       alias: {
         config: path.resolve(CLIENT_DIR, 'config'),
