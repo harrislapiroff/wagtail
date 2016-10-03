@@ -13,11 +13,11 @@ export const getChildPages = (id, options = {}) => {
     url += `&${options.filter}`;
   }
 
-  return get(url);
+  return get(url).then(res => res.body);
 };
 
 export const getPage = (id) => {
   const url = `${ADMIN_API.PAGES}${id}/`;
 
-  return get(url);
+  return get(url).then(res => res.body);
 };
