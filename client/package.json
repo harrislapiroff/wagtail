@@ -16,7 +16,5 @@
     "mustache": "^2.2.1",
     "yargs": "^4.2.0"
   },
-  "scripts": {
-    "test": "npm test"
-  }
+  "scripts": {}
 }

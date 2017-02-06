@@ -16,13 +16,13 @@ describe('explorer reducers', () => {
 
   describe('explorer', () => {
     it('exists', () => {
-      expect(explorer).to.be.a('function');;
+      expect(explorer).to.be.a('function');
     });
   });
 
   describe('nodes', () => {
     it('exists', () => {
-      expect(nodes).to.be.a('function');;
+      expect(nodes).to.be.a('function');
     });
   });
 
@@ -33,7 +33,7 @@ describe('explorer reducers', () => {
     };
 
     it('exists', () => {
-      expect(transport).to.be.a('function');;
+      expect(transport).to.be.a('function');
     });
 
     it('returns the initial state', () => {
