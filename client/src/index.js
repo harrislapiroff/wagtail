@@ -1,5 +1,5 @@
 /**
- * Entry point for the Wagtail package.
+ * Entry point for the wagtail package.
  * Re-exports components and other modules via a cleaner API.
  */
 
