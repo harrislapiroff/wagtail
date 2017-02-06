@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { ADMIN_URLS, STRINGS } from '../../config/wagtail';
-import Icon from '../../components/icon/Icon';
+import Icon from '../../components/Icon/Icon';
 import Button from '../../components/Button/Button';
-import PublishStatus from '../../components/publish-status/PublishStatus';
-import PublishedTime from '../../components/published-time/PublishedTime';
+import PublicationStatus from '../../components/PublicationStatus/PublicationStatus';
+import AbsoluteDate from '../../components/AbsoluteDate/AbsoluteDate';
 
 const ExplorerItem = ({ title, typeName, data, filter, onItemClick }) => {
   const { id, meta } = data;
@@ -30,7 +30,7 @@ const ExplorerItem = ({ title, typeName, data, filter, onItemClick }) => {
       </h3>
 
       <p className="c-explorer__meta">
-        <span className="c-explorer__meta__type">{typeName}</span> | <PublishedTime publishedAt={meta ? meta.latest_revision_created_at : null} /> | <PublishStatus status={meta ? meta.status : null} />
+        <span className="c-explorer__meta__type">{typeName}</span> | <AbsoluteDate time={meta ? meta.latest_revision_created_at : null} /> | <PublicationStatus status={meta ? meta.status : null} />
       </p>
     </Button>
   );

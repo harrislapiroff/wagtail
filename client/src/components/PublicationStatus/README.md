@@ -1,14 +1,14 @@
-# PublishStatus
+# PublicationStatus
 
 Displays the publication status of a page in a pill.
 
 ## Usage
 
 ```javascript
-import { PublishStatus } from 'wagtail';
+import { PublicationStatus } from 'wagtail';
 
 render(
-    <PublishStatus
+    <PublicationStatus
         status={status}
     />
 );

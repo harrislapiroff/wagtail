@@ -65,7 +65,7 @@ export default function nodes(state = {}, action) {
     });
 
   case 'RESET_TREE':
-    return {};
+    return defaultState;
 
   // eslint-disable-next-line no-case-declarations
   case 'SET_FILTER':

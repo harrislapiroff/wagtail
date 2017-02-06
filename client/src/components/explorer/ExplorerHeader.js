@@ -1,10 +1,10 @@
 import React from 'react';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
-import { EXPLORER_ANIM_DURATION, EXPLORER_FILTERS } from '../../config';
+import { EXPLORER_ANIM_DURATION, EXPLORER_FILTERS } from '../../config/config';
 import { STRINGS } from '../../config/wagtail';
 
-import Icon from '../../components/icon/Icon';
-import Filter from '../../components/explorer/Filter';
+import Icon from '../../components/Icon/Icon';
+import Filter from '../../components/Explorer/Filter';
 
 const ExplorerHeader = ({ page, depth, filter, onPop, onFilter, transName }) => {
   const title = depth < 2 || !page ? STRINGS.EXPLORER : page.title;

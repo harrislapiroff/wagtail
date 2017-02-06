@@ -1,28 +1,25 @@
-import { expect } from 'chai';
-
-import '../stubs';
-import * as actions from 'components/explorer/actions';
-import rootReducer from 'components/explorer/reducers';
-import explorer from 'components/explorer/reducers/explorer';
-import nodes from 'components/explorer/reducers/nodes';
-import transport from 'components/explorer/reducers/transport';
+import * as actions from '../actions';
+import rootReducer from './index';
+import explorer from './explorer';
+import nodes from './nodes';
+import transport from './transport';
 
 describe('explorer reducers', () => {
   describe('root', () => {
     it('exists', () => {
-      expect(rootReducer).to.be.a('function');
+      expect(rootReducer).toBeDefined();
     });
   });
 
   describe('explorer', () => {
     it('exists', () => {
-      expect(explorer).to.be.a('function');
+      expect(explorer).toBeDefined();
     });
   });
 
   describe('nodes', () => {
     it('exists', () => {
-      expect(nodes).to.be.a('function');
+      expect(nodes).toBeDefined();
     });
   });
 
@@ -33,16 +30,16 @@ describe('explorer reducers', () => {
     };
 
     it('exists', () => {
-      expect(transport).to.be.a('function');
+      expect(transport).toBeDefined();
     });
 
     it('returns the initial state', () => {
-      expect(transport(undefined, {})).to.deep.equal(initialState);
+      expect(transport(undefined, {})).toEqual(initialState);
     });
 
     it('returns error message and flag', () => {
       const action = actions.fetchFailure(new Error('Test error'));
-      expect(transport(initialState, action)).to.deep.equal({
+      expect(transport(initialState, action)).toEqual({
         error: 'Test error',
         showMessage: true,
       });
@@ -54,7 +51,7 @@ describe('explorer reducers', () => {
         error: 'Test error',
         showMessage: true,
       };
-      expect(transport(errorState, action)).to.deep.equal(initialState);
+      expect(transport(errorState, action)).toEqual(initialState);
     });
   });
 });

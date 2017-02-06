@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 
-import { PAGES_ROOT_ID } from '../../../config';
+import { PAGES_ROOT_ID } from '../../../config/config';
 import * as admin from '../../../api/admin';
 
 export const fetchStart = createAction('FETCH_START');
@@ -22,6 +22,26 @@ export const clearError = createAction('CLEAR_TRANSPORT_ERROR');
 export const resetTree = createAction('RESET_TREE');
 
 export const treeResolved = createAction('TREE_RESOLVED');
+
+export const fetchChildrenSuccess = createAction('FETCH_CHILDREN_SUCCESS', (id, json) => ({ id, json }));
+
+export const fetchChildrenStart = createAction('FETCH_CHILDREN_START');
+
+/**
+ * Gets the children of a node from the API.
+ */
+export function fetchChildren(id = 'root') {
+  return (dispatch, getState) => {
+    const { explorer } = getState();
+
+    dispatch(fetchChildrenStart(id));
+
+    return admin.getChildPages(id, {
+      fields: explorer.fields,
+      filter: explorer.filter,
+    }).then(json => dispatch(fetchChildrenSuccess(id, json)));
+  };
+}
 
 // Make this a bit better... hmm....
 export function fetchTree(id = 1) {
@@ -45,38 +65,24 @@ export function fetchTree(id = 1) {
 export function fetchRoot() {
   return (dispatch) => {
     // TODO Should not need an id.
-    dispatch(resetTree(1));
+    dispatch(resetTree(PAGES_ROOT_ID));
+    dispatch(fetchBranchStart(PAGES_ROOT_ID));
 
-    return admin.getChildPages(PAGES_ROOT_ID).then((json) => {
-      // TODO right now, only works for a single homepage. What do we do if there is no homepage?
-      const rootId = json.items[0].id;
+    dispatch(fetchBranchSuccess(PAGES_ROOT_ID, {
+      children: {},
+      meta: {
+        children: {},
+      },
+    }));
 
-      dispatch(fetchTree(rootId));
-    });
+    dispatch(fetchChildren(PAGES_ROOT_ID));
+
+    dispatch(treeResolved());
   };
 }
 
 export const toggleExplorer = createAction('TOGGLE_EXPLORER');
 
-export const fetchChildrenSuccess = createAction('FETCH_CHILDREN_SUCCESS', (id, json) => ({ id, json }));
-
-export const fetchChildrenStart = createAction('FETCH_CHILDREN_START');
-
-/**
- * Gets the children of a node from the API.
- */
-export function fetchChildren(id = 'root') {
-  return (dispatch, getState) => {
-    const { explorer } = getState();
-
-    dispatch(fetchChildrenStart(id));
-
-    return admin.getChildPages(id, {
-      fields: explorer.fields,
-      filter: explorer.filter,
-    }).then(json => dispatch(fetchChildrenSuccess(id, json)));
-  };
-}
 
 export function setFilter(filter) {
   return (dispatch, getState) => {

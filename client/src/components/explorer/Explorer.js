@@ -3,7 +3,7 @@ import CSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 
 import * as actions from './actions';
-import { EXPLORER_ANIM_DURATION } from '../../config';
+import { EXPLORER_ANIM_DURATION } from '../../config/config';
 import ExplorerPanel from './ExplorerPanel';
 
 // TODO To refactor.
@@ -81,7 +81,7 @@ Explorer.propTypes = {
   filter: React.PropTypes.string.isRequired,
   nodes: React.PropTypes.object.isRequired,
   transport: React.PropTypes.object.isRequired,
-  page: React.PropTypes.number,
+  page: React.PropTypes.any,
   defaultPage: React.PropTypes.number,
   onPop: React.PropTypes.func.isRequired,
   setDefaultPage: React.PropTypes.func.isRequired,

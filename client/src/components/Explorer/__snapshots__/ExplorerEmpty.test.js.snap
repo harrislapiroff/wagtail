@@ -1,0 +1,6 @@
+exports[`ExplorerEmpty basic 1`] = `
+<div
+  className="c-explorer__placeholder">
+  No results
+</div>
+`;
