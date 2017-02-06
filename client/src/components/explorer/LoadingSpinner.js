@@ -1,6 +1,6 @@
 import React from 'react';
 import { STRINGS } from '../../config/wagtail';
-import Icon from '../../components/icon/Icon';
+import Icon from '../../components/Icon/Icon';
 
 const LoadingSpinner = () => (
   <div className="c-explorer__loading">
