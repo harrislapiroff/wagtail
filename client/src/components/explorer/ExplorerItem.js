@@ -8,6 +8,8 @@ import AbsoluteDate from '../../components/AbsoluteDate/AbsoluteDate';
 
 const ExplorerItem = ({ title, typeName, data, filter, onItemClick }) => {
   const { id, meta } = data;
+  const status = meta ? meta.status : null;
+  const time = meta ? meta.latest_revision_created_at : null;
 
   // If we only want pages with children, get this info by
   // looking at the descendants count vs children count.
@@ -16,21 +18,24 @@ const ExplorerItem = ({ title, typeName, data, filter, onItemClick }) => {
   if (meta) {
     count = filter.match(/has_children/) ? meta.descendants.count - meta.children.count : meta.children.count;
   }
+  const hasChildren = count > 0;
 
   return (
     <Button href={`${ADMIN_URLS.PAGES}${id}`} className="c-explorer__item">
-      {count > 0 ? (
-        <span role="button" className="c-explorer__children" onClick={onItemClick.bind(null, id)}>
+      {hasChildren ? (
+        <span
+          role="button"
+          className="c-explorer__children"
+          onClick={onItemClick.bind(null, id)}
+        >
           <Icon name="folder-inverse" title={STRINGS.SEE_CHILDREN} />
         </span>
       ) : null}
 
-      <h3 className="c-explorer__title">
-        {title}
-      </h3>
+      <h3 className="c-explorer__title">{title}</h3>
 
       <p className="c-explorer__meta">
-        <span className="c-explorer__meta__type">{typeName}</span> | <AbsoluteDate time={meta ? meta.latest_revision_created_at : null} /> | <PublicationStatus status={meta ? meta.status : null} />
+        <span className="c-explorer__meta__type">{typeName}</span> | <AbsoluteDate time={time} /> | <PublicationStatus status={status} />
       </p>
     </Button>
   );

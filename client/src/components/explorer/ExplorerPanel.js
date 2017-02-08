@@ -1,8 +1,10 @@
 import React from 'react';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
-import { EXPLORER_ANIM_DURATION } from '../../config/config';
 
-import ExplorerEmpty from './ExplorerEmpty';
+import { EXPLORER_ANIM_DURATION } from '../../config/config';
+import { STRINGS } from '../../config/wagtail';
+
+
 import ExplorerHeader from './ExplorerHeader';
 import ExplorerItem from './ExplorerItem';
 import LoadingSpinner from './LoadingSpinner';
@@ -130,7 +132,7 @@ export default class ExplorerPanel extends React.Component {
         ret = this.renderChildren(page);
       } else {
         ret = (
-          <ExplorerEmpty />
+          <div className="c-explorer__placeholder">{STRINGS.NO_RESULTS}</div>
         );
       }
     }
