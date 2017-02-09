@@ -5,6 +5,12 @@ var config = base('development');
 
 // development overrides go here
 config.watch = true;
+
+config.watchOptions = {
+  poll: 1000,
+  aggregateTimeout: 300,
+};
+
 // See http://webpack.github.io/docs/configuration.html#devtool
 config.devtool = 'inline-source-map';
 
