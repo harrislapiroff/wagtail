@@ -1,6 +1,7 @@
 {
   "name": "wagtail-client",
   "version": "0.1.0",
+  "repository": "https://github.com/wagtail/wagtail",
   "description": "Wagtail's client side code",
   "license": "BSD-3-Clause",
   "author": "Wagtail",
