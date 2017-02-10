@@ -9,10 +9,6 @@ export const getChildPages = (id, options = {}) => {
     url += `&fields=${global.encodeURIComponent(options.fields.join(','))}`;
   }
 
-  if (options.filter) {
-    url += `&${options.filter}`;
-  }
-
   return get(url).then(res => res.body);
 };
 
