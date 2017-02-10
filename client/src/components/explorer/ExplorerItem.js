@@ -28,7 +28,7 @@ const ExplorerItem = ({ title, typeName, data, filter, onItemClick }) => {
           className="c-explorer__children"
           onClick={onItemClick.bind(null, id)}
         >
-          <Icon name="folder-inverse" title={STRINGS.SEE_CHILDREN} />
+          <Icon name="arrow-right" title={STRINGS.SEE_CHILDREN} />
         </span>
       ) : null}
 
