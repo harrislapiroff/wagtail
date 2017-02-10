@@ -107,12 +107,13 @@ $c-explorer-easing: cubic-bezier(0.075, 0.820, 0.165, 1.000);
 }
 
 .c-explorer__see-more {
-    cursor: pointer;
     padding: 1rem 1rem;
     background: rgba(0,0,0,0.2);
     color: $c-explorer-secondary;
+    display: block;
 
     &:hover {
+        color: $c-explorer-secondary;
         background: rgba(0,0,0,0.4);
     }
 }
