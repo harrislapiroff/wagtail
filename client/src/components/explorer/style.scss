@@ -1,5 +1,5 @@
 $c-explorer-bg: #4C4E4D;
-$c-explorer-secondary: #aaa;
+$c-explorer-secondary: #cacaca;
 $c-explorer-easing: cubic-bezier(0.075, 0.820, 0.165, 1.000);
 
 .c-explorer, .c-explorer * {
@@ -145,7 +145,7 @@ $c-explorer-easing: cubic-bezier(0.075, 0.820, 0.165, 1.000);
 
 .c-status {
     background: $color-grey-1;
-    color: #ddd;
+    color: $c-explorer-secondary;
     text-transform: uppercase;
     letter-spacing: .03rem;
     font-size: 10px;

@@ -34,7 +34,7 @@ const defaultState = {
 };
 
 // TODO Why isn't the default state used on init?
-export default function nodes(state = {}, action) {
+export default function nodes(state = {}, action = {}) {
   switch (action.type) {
   case 'FETCH_CHILDREN_START':
     // TODO Very hard to understand this code. To refactor.

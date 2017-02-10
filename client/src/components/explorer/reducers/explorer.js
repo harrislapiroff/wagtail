@@ -14,7 +14,7 @@ const defaultState = {
   pageTypes: {},
 };
 
-export default function explorer(state = defaultState, action) {
+export default function explorer(state = defaultState, action = {}) {
   let newNodes = state.path;
 
   switch (action.type) {
