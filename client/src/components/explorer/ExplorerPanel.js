@@ -198,7 +198,7 @@ export default class ExplorerPanel extends React.Component {
                   <div key={0}>
                     {this.getContents()}
                   </div>
-              )}
+                )}
               </CSSTransitionGroup>
 
             </div>
