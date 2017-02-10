@@ -8,6 +8,7 @@ import { STRINGS } from '../../config/wagtail';
 import ExplorerHeader from './ExplorerHeader';
 import ExplorerItem from './ExplorerItem';
 import LoadingSpinner from './LoadingSpinner';
+import PageCount from './PageCount';
 
 export default class ExplorerPanel extends React.Component {
   constructor(props) {
@@ -197,8 +198,11 @@ export default class ExplorerPanel extends React.Component {
                 {page.isFetching ? <LoadingSpinner key={1} /> : (
                   <div key={0}>
                     {this.getContents()}
+                    {(page.children.count > page.children.items.length) && (
+                      <PageCount id={page.id} count={page.meta.children.count} title={page.title} />
+                    )}
                   </div>
-              )}
+                )}
               </CSSTransitionGroup>
 
             </div>
