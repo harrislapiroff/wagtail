@@ -9,6 +9,9 @@ export const getChildPages = (id, options = {}) => {
     url += `&fields=${global.encodeURIComponent(options.fields.join(','))}`;
   }
 
+  // Only show pages that have children for now
+  url += `&has_children=1`;
+
   return get(url).then(res => res.body);
 };
 
